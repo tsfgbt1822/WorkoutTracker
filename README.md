@@ -1,6 +1,6 @@
 # WorkoutTracker
 
-##Description:
+## Description:
 Basic workout and general health tracking app, used to log workouts and track goals, with
 specific exercises able to be chosen and number of reps, etc. for users to be able to track their
 progress and repeat workouts easily. For the use of helping users maintain health and general
