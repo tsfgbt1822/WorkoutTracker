@@ -36,7 +36,7 @@ wellness.
 
 
 ## Team member roles:
-● Frontend (React): Seun, Tori
-● Backend (Node/Express): Josh
-● Database (MongoDB): Jacob, Tori
-● Presentation/Documentation: All
+- Frontend (React): Seun, Tori
+- Backend (Node/Express): Josh
+- Database (MongoDB): Jacob, Tori
+- Presentation/Documentation: All
