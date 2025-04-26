@@ -7,9 +7,9 @@ progress and repeat workouts easily. For the use of helping users maintain healt
 wellness.
 
 ## Planned Features
-● Goal Tracker: Users can input frequency/progress goals
-● Login: Users have an ID and password to store data, workouts and goals
-● Log Workouts: Users can log a workout for a specific date by choosing exercises and inputting number of reps/sets and weight used, as well as date and other information
+- Goal Tracker: Users can input frequency/progress goals
+- Login: Users have an ID and password to store data, workouts and goals
+- Log Workouts: Users can log a workout for a specific date by choosing exercises and inputting number of reps/sets and weight used, as well as date and other information
 
 ## Technical Implementation Plan:
 ### What routes/components will be in React?
