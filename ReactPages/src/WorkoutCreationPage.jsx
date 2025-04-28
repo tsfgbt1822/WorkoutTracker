@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './WorkoutCreationPage.css';
 
 const WorkoutCreationPage = () => {
   const [workoutName, setWorkoutName] = useState('');
