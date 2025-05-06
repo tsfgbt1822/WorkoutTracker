@@ -17,3 +17,4 @@ Everyone's username & password is their pawprint
 4. Click “Create New Playground” in MongoDB for VS Code to get started.
 
 You'll need to install mongoose
+You'll also need to add your username and password into .env and server.js
