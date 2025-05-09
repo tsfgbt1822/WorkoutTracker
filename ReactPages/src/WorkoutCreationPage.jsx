@@ -1,6 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
-const WorkoutCreationPage = () => {
+const WorkoutCreationPage = ({ user }) => {
   const [workoutName, setWorkoutName] = useState('');
   const [workoutDate, setWorkoutDate] = useState('');
   const [exercises, setExercises] = useState([{ name: '', sets: '', reps: '' }]);
@@ -15,15 +16,30 @@ const WorkoutCreationPage = () => {
     setExercises([...exercises, { name: '', sets: '', reps: '' }]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Workout Submitted:', {
-      workoutName,
-      workoutDate,
-      exercises,
-    });
-  };
+    try {
+      const res = await axios.post('http://localhost:5000/api/workouts/create', {
+        userId: user?.id || null,
+        workoutName,
+        workoutDate,
+        exercises,
+      });
 
+      if (res.data.success) {
+        alert('Workout saved!');
+        setWorkoutName('');
+        setWorkoutDate('');
+        setExercises([{ name: '', sets: '', reps: '' }]);
+      } else {
+        alert('Failed to save workout');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error saving workout');
+    }
+  };
+  
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h1>Create New Workout</h1>

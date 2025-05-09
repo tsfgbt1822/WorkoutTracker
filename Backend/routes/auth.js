@@ -1,37 +1,41 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
-const User = require('../../models/User');
 const router = express.Router();
+const User = require('../../models/User');
 
-// Register
+// Register new user
 router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const existing = await User.findOne({ username });
-    if (existing) return res.status(400).json({ error: 'User already exists' });
+  const { userID, password } = req.body;
+  console.log('[Register Attempt]', userID); 
 
-    const hashed = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashed });
-    await user.save();
-    res.status(201).json({ message: 'User registered' });
+  try {
+    const existingUser = await User.findOne({ username: userID });
+    if (existingUser) {
+      return res.json({ success: false, message: 'Username already exists' });
+    }
+
+    const newUser = new User({ username: userID, password });
+    await newUser.save();
+    res.json({ success: true, user: { username: newUser.username } });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[Registration Error]', err);
+    res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
-// Login
+
+// Login user
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { userID, password } = req.body;
+
   try {
-    const user = await User.findOne({ username });
-    if (!user) return res.status(400).json({ error: 'Invalid credentials' });
+    const user = await User.findOne({ username: userID });
+    if (!user || user.password !== password) {
+      return res.json({ success: false, message: 'Invalid credentials' });
+    }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
-
-    res.json({ message: 'Login successful', user: { id: user._id, username: user.username } });
+    res.json({ success: true, user: { id: user._id, username: user.username } });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
